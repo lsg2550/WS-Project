@@ -30,6 +30,10 @@ public class DisplayStage {
         DISPLAY_STAGE.setScene(scene);
     }
 
+    public static void close() {
+        DISPLAY_STAGE.close();
+    }
+
     public static void show() {
         DISPLAY_STAGE.show();
     }

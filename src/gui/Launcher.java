@@ -2,6 +2,7 @@ package gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import utils.io.IO;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Launcher extends Application {
         DisplayMenu.init();
         DisplaySignIn.init();
         DisplayRegister.init();
+        IO.init();
+        
     }
 
     /**

@@ -80,12 +80,17 @@ public class User {
 
     @Override
     public String toString() {
-        String userInfo = studentID
-                + "\n" + firstName
-                + "\n" + lastName
-                + "\n" + password
-                + "\n" + currentSemester;
-        return userInfo;
+        StringBuilder userInfo = new StringBuilder();
+        userInfo.append("ID: ").append(studentID);
+        userInfo.append(System.lineSeparator());
+        userInfo.append("FN: ").append(firstName);
+        userInfo.append(System.lineSeparator());
+        userInfo.append("LN: ").append(lastName);
+        userInfo.append(System.lineSeparator());
+        userInfo.append("PW: ").append(password);
+        userInfo.append(System.lineSeparator());
+        userInfo.append("SEM: ").append(currentSemester);
+        return userInfo.toString();
     }
 
 }
