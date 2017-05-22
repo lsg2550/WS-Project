@@ -21,6 +21,7 @@ public class GUI {
     private void display() {
         BorderPane root = new BorderPane();
         root.setTop(DisplayMenu.getDISPLAY_MENUBAR());
+        root.setCenter(DisplayTableView.getDISPLAY_CLASSES_TABLEVIEW());
         
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setTitle("Weekly Schedule");

@@ -53,14 +53,14 @@ public class DisplayMenu {
                 userRemoveClass = new MenuItem("Remove Class");
         userOperations.getItems().addAll(userAddClass, userRemoveClass);
         userAddClass.setOnAction(e -> {
-            /**
-             * Opens a form window to add a class
-             */
+            DisplayStage.setResizable(false);
+            DisplayStage.setScene(DisplayAddClass.getScene());
+            DisplayStage.show();
         });
         userRemoveClass.setOnAction(e -> {
-            /**
-             * Opens a form window to remove a class
-             */
+            DisplayStage.setResizable(false);
+            DisplayStage.setScene(DisplayRemoveClass.getScene());
+            DisplayStage.show();
         });
 
         //About
