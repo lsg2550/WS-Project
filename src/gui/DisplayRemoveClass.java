@@ -11,7 +11,7 @@ import utils.io.Save;
  *
  * @author Luis
  */
-public class DisplayRemoveClass {
+class DisplayRemoveClass {
 
     private static Scene scene;
     private static final ComboBox USER_CLASSES_TO_BE_REMOVED = new ComboBox();
@@ -24,7 +24,14 @@ public class DisplayRemoveClass {
         //Button
         Button removeClass = new Button("Remove");
         removeClass.setOnAction(e -> {
-            
+            if (Save.currentUser != null) {
+                if (!USER_CLASSES_TO_BE_REMOVED.getItems().isEmpty()) {
+                    Save.currentUser.getClassesArrayList().remove(USER_CLASSES_TO_BE_REMOVED.getSelectionModel().getSelectedIndex());
+                    DisplayStage.close();
+                }
+            } else {
+                System.out.println("You're Not Logged In!");
+            }
         });
 
         //Children
@@ -32,20 +39,18 @@ public class DisplayRemoveClass {
         scene = new Scene(root, 200, 150);
     }
 
-    private static void clear() {
-        USER_CLASSES_TO_BE_REMOVED.getItems().clear();
-    }
-
     private static void fillComboBox() {
         if (Save.currentUser != null) {
+            USER_CLASSES_TO_BE_REMOVED.getItems().clear();
             Save.currentUser.getClassesArrayList().forEach((classes) -> {
-                USER_CLASSES_TO_BE_REMOVED.getItems().add(classes.getClassID() + classes.getClassName());
+                USER_CLASSES_TO_BE_REMOVED.getItems().add(classes.getClassID() + "-" + classes.getClassName());
+                //System.out.println("Index:" + USER_CLASSES_TO_BE_REMOVED.getItems().indexOf(classes)); //Logging
             });
+            USER_CLASSES_TO_BE_REMOVED.getSelectionModel().selectFirst();
         }
     }
 
-    public static Scene getScene() {
-        clear();
+    protected static Scene getScene() {
         fillComboBox();
         return scene;
     }

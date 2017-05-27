@@ -12,7 +12,6 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        GUI gui = new GUI(primaryStage);
         DisplayStage.init();
         DisplayMenu.init();
         DisplaySignIn.init();
@@ -20,7 +19,10 @@ public class Launcher extends Application {
         DisplayTableView.init();
         DisplayAddClass.init();
         DisplayRemoveClass.init();
+        DisplayWarning.init();
+        DisplayAbout.init();
         IO.init();
+        GUI gui = new GUI(primaryStage);
     }
 
     /**

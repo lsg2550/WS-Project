@@ -8,6 +8,6 @@ import javafx.scene.image.Image;
  */
 public class Icon {
 
-    public static final Image ICON = new Image("assets/icon/ico.png");
-
+    public static final Image STAGE_ICON = new Image("assets/icon/stageIco.png");
+    public static final Image WARNING_ICON = new Image("assets/icon/warnIco.png"); //Placeholder
 }

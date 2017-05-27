@@ -15,11 +15,8 @@ public class User {
     private String currentSemester; //Can be null
     private final ArrayList<Classes> STUDENT_CLASSES = new ArrayList<>(10);
 
-    public User(String firstName, String lastName, String password, String studentID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.studentID = studentID;
+    public User() {
+
     }
 
     public User(String firstName, String lastName, String password, String studentID, String currentSemester) {
@@ -27,7 +24,12 @@ public class User {
         this.lastName = lastName;
         this.password = password;
         this.studentID = studentID;
-        this.currentSemester = currentSemester;
+        
+        if (currentSemester == null || currentSemester.equals("")) {
+            this.currentSemester = "N/A";
+        } else {
+            this.currentSemester = currentSemester;
+        }
     }
 
     public String getFirstName() {

@@ -1,6 +1,5 @@
 package gui;
 
-import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -12,11 +11,11 @@ import user.Classes;
  *
  * @author Luis
  */
-public class DisplayTableView {
-    
+class DisplayTableView {
+
     private static final TableView<Classes> DISPLAY_CLASSES_TABLEVIEW = new TableView<Classes>();
     private static final ObservableList<Classes> DISPLAY_CLASSES_OBSERVABLELIST = FXCollections.observableArrayList();
-    
+
     protected static void init() {
         //TableColumns
         TableColumn tableColumnTime = new TableColumn("Time");
@@ -75,7 +74,7 @@ public class DisplayTableView {
         DISPLAY_CLASSES_TABLEVIEW.getColumns().addAll(tableColumn);
         DISPLAY_CLASSES_TABLEVIEW.getColumns().addListener(new ListChangeListener<TableColumn<Classes, ?>>() {
             boolean suspsended = false;
-            
+
             @Override
             public void onChanged(ListChangeListener.Change<? extends TableColumn<Classes, ?>> c) {
                 c.next();
@@ -87,17 +86,17 @@ public class DisplayTableView {
             }
         });
     }
-    
-    public static void addData() {
+
+    protected static void addData() {
         /**
          * Grab Info from Save.currentUser and put it into the tableview
          */
-        
+
         DISPLAY_CLASSES_TABLEVIEW.setItems(DISPLAY_CLASSES_OBSERVABLELIST);
     }
-    
-    public static TableView<Classes> getDISPLAY_CLASSES_TABLEVIEW() {
+
+    protected static TableView<Classes> getDISPLAY_CLASSES_TABLEVIEW() {
         return DISPLAY_CLASSES_TABLEVIEW;
     }
-    
+
 }

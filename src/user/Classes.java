@@ -9,15 +9,23 @@ public class Classes {
     //Class 
     private Boolean monday, tuesday, wednesday, thursday, friday, saturday, sunday;
 
-    //Class Time
-    private int timeFromHour, timeFromMinute;
-    private int timeToHour, timeToMinute;
-
     //Class Information
     private String classID, className;
-    private String classLocation;
+    private String classLocation; //Can Be Null
 
-    public Classes(boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, boolean sunday, int timeFromHour, int timeFromMinute, int timeToHour, int timeToMinute, String classID, String className, String classLocation, String semester) {
+    //Class Time
+    private String timeFromHour, timeFromMinute, timeFromPeriod;
+    private String timeToHour, timeToMinute, timeToPeriod;
+
+    public Classes() {
+
+    }
+
+    public Classes(boolean monday, boolean tuesday, boolean wednesday, boolean thursday,
+            boolean friday, boolean saturday, boolean sunday, String timeFromHour,
+            String timeFromMinute, String timeFromPeriod, String timeToHour,
+            String timeToMinute, String timeToPeriod, String classID, String className,
+            String classLocation) {
         this.monday = monday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
@@ -27,11 +35,18 @@ public class Classes {
         this.sunday = sunday;
         this.timeFromHour = timeFromHour;
         this.timeFromMinute = timeFromMinute;
+        this.timeFromPeriod = timeFromPeriod;
         this.timeToHour = timeToHour;
         this.timeToMinute = timeToMinute;
+        this.timeToPeriod = timeToPeriod;
         this.classID = classID;
         this.className = className;
-        this.classLocation = classLocation;
+        
+        if (classLocation == null || classLocation.equals("")) {
+            this.classLocation = "N/A";
+        } else {
+            this.classLocation = classLocation;
+        }
     }
 
     public boolean isMonday() {
@@ -90,36 +105,52 @@ public class Classes {
         this.sunday = sunday;
     }
 
-    public int getTimeFromHour() {
+    public String getTimeFromHour() {
         return timeFromHour;
     }
 
-    public void setTimeFromHour(int timeFromHour) {
+    public void setTimeFromHour(String timeFromHour) {
         this.timeFromHour = timeFromHour;
     }
 
-    public int getTimeFromMinute() {
+    public String getTimeFromMinute() {
         return timeFromMinute;
     }
 
-    public void setTimeFromMinute(int timeFromMinute) {
+    public void setTimeFromMinute(String timeFromMinute) {
         this.timeFromMinute = timeFromMinute;
     }
 
-    public int getTimeToHour() {
+    public String getTimeFromPeriod() {
+        return timeFromPeriod;
+    }
+
+    public void setTimeFromPeriod(String timeFromPeriod) {
+        this.timeFromPeriod = timeFromPeriod;
+    }
+
+    public String getTimeToHour() {
         return timeToHour;
     }
 
-    public void setTimeToHour(int timeToHour) {
+    public void setTimeToHour(String timeToHour) {
         this.timeToHour = timeToHour;
     }
 
-    public int getTimeToMinute() {
+    public String getTimeToMinute() {
         return timeToMinute;
     }
 
-    public void setTimeToMinute(int timeToMinute) {
+    public void setTimeToMinute(String timeToMinute) {
         this.timeToMinute = timeToMinute;
+    }
+
+    public String getTimeToPeriod() {
+        return timeToPeriod;
+    }
+
+    public void setTimeToPeriod(String timeToPeriod) {
+        this.timeToPeriod = timeToPeriod;
     }
 
     public String getClassID() {
@@ -149,33 +180,24 @@ public class Classes {
     @Override
     public String toString() {
         StringBuilder classInfo = new StringBuilder();
-        classInfo.append(classID);
         classInfo.append(System.lineSeparator());
-        classInfo.append(className);
+        classInfo.append("CLASS INFO START");
         classInfo.append(System.lineSeparator());
-        classInfo.append(classLocation);
+        classInfo.append("CLASS: ").append(classID).append(":").append(className).append(":").append(classLocation); //Split by : to return ID - Name - Location
         classInfo.append(System.lineSeparator());
-        classInfo.append(monday.toString());
+        classInfo.append("DAYS: ").append(monday.toString()).append(":")
+                .append(tuesday.toString()).append(":")
+                .append(wednesday.toString()).append(":")
+                .append(thursday.toString()).append(":")
+                .append(friday.toString()).append(":")
+                .append(saturday.toString()).append(":")
+                .append(sunday.toString()); //Split by : to return monday-tuesday-wednesday-thursday-friday-saturday-sunday
         classInfo.append(System.lineSeparator());
-        classInfo.append(tuesday.toString());
+        classInfo.append("FROM: ").append(timeFromHour).append(":").append(timeFromMinute).append(":").append(timeFromPeriod); //Split by : to return Hour-Minute-Period
         classInfo.append(System.lineSeparator());
-        classInfo.append(wednesday.toString());
+        classInfo.append("TO: ").append(timeToHour).append(":").append(timeToMinute).append(":").append(timeToPeriod); //Split by : to return Hour-Minute-Period
         classInfo.append(System.lineSeparator());
-        classInfo.append(thursday.toString());
-        classInfo.append(System.lineSeparator());
-        classInfo.append(friday.toString());
-        classInfo.append(System.lineSeparator());
-        classInfo.append(saturday.toString());
-        classInfo.append(System.lineSeparator());
-        classInfo.append(sunday.toString());
-        classInfo.append(System.lineSeparator());
-        classInfo.append(Integer.toString(timeFromHour));
-        classInfo.append(System.lineSeparator());
-        classInfo.append(Integer.toString(timeFromMinute));
-        classInfo.append(System.lineSeparator());
-        classInfo.append(Integer.toString(timeToHour));
-        classInfo.append(System.lineSeparator());
-        classInfo.append(Integer.toString(timeToMinute));
+        classInfo.append("CLASS INFO END");
         return classInfo.toString();
     }
 

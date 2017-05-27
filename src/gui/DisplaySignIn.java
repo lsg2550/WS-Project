@@ -18,12 +18,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import utils.io.IO;
+import utils.io.Save;
 
 /**
  *
  * @author Luis
  */
-public class DisplaySignIn {
+class DisplaySignIn {
 
     private static Scene scene;
 
@@ -46,40 +47,47 @@ public class DisplaySignIn {
         Button userSubmit = new Button("Sign-In");
         userSubmit.setOnAction((ActionEvent e) -> {
             if (new File(IO.getDOCS().toString() + "/" + userIDInput.getText() + ".txt").exists()) {
+                File userFile = new File(IO.getDOCS().toString() + "/" + userIDInput.getText() + ".txt");
 
-                try (BufferedReader br = new BufferedReader(new FileReader(new File(IO.getDOCS().toString() + "/" + userIDInput.getText() + ".txt")))) {
-                    boolean userCheck = false;
-                    boolean passCheck = false;
+                try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
+                    boolean userCheck = false, passCheck = false;
 
                     for (String line = br.readLine(); line != null; line = br.readLine()) {
                         if (line.contains("ID: ")) {
                             line = line.replace("ID: ", " ").trim();
-                            System.out.println("User ID: " + line);
                             if (line.equals(userIDInput.getText())) {
                                 userCheck = true;
                             }
+
+                            //System.out.println("User ID: " + line); //Logging
                         }
                         if (line.contains("PW: ")) {
                             line = line.replace("PW: ", " ").trim();
-                            System.out.println("Password: " + line);
                             if (line.equals(userPassInput.getText())) {
                                 passCheck = true;
                             }
+
+                            //System.out.println("Password: " + line); //Logging
                         }
                     }
 
+                    br.close(); //Reading is done.
                     if (userCheck && passCheck) {
-                        System.out.println("Successfully Logged In!");
-                        //Change Save.currentUser Data
+                        Save.loadInfo(userFile);
+                        System.out.printf("Welcome, %s.", Save.currentUser.getFirstName()); //Logging
+
                         DisplayStage.close();
                     } else {
-                        System.out.println("Incorrect Login Information!");
+                        DisplayWarning.show("Incorrect Login Information!");
+                        //System.out.println("Incorrect Login Information!");
                     }
                 } catch (IOException ex) {
-                    System.out.println("Could Not Read From File!");
+                    DisplayWarning.show("Could Not Read From File!");
+                    //System.out.println("Could Not Read From File!");
                 }
             } else {
-                System.out.println("User doesn't exist or password is entered incorrectly.");
+                DisplayWarning.show("User doesn't exist or password was entered incorrectly.");
+                //System.out.println("User doesn't exist or password was entered incorrectly.");
             }
 
             //Clear Text Fields

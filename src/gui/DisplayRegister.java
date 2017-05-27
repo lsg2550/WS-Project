@@ -25,7 +25,7 @@ import utils.io.Sanitize;
  *
  * @author Luis
  */
-public class DisplayRegister {
+class DisplayRegister {
 
     private static Scene scene;
 
@@ -59,39 +59,42 @@ public class DisplayRegister {
                     || Sanitize.checkForEmptyString(userFirstNameInput.getText())
                     || Sanitize.checkForEmptyString(userLastNameInput.getText())
                     || Sanitize.checkForEmptyString(userPassInput.getText())) {
-                System.out.println("Some Required Fields Were Not Filled Out.");
+                DisplayWarning.show("Some Required Fields Were Not Filled Out.");
+                //System.out.println("Some Required Fields Were Not Filled Out.");
             } else if (Sanitize.checkForRandomSymbols(userIDInput.getText())
                     || Sanitize.checkForRandomSymbols(userFirstNameInput.getText())
                     || Sanitize.checkForRandomSymbols(userLastNameInput.getText())) {
-                System.out.println("Some Fields Have Special Symbols.");
+                DisplayWarning.show("Some Fields Have Special Symbols.");
+                //System.out.println("Some Fields Have Special Symbols.");
             } else if (Sanitize.checkForDigits(userFirstNameInput.getText())
                     || Sanitize.checkForDigits(userLastNameInput.getText())) {
-                System.out.println("First And/Or Last Name Have Digits.");
+                DisplayWarning.show("First And/Or Last Name Have Digits.");
+                //System.out.println("First And/Or Last Name Have Digits.");
             } else {
                 if (!new File(IO.getDOCS().toString() + "/" + userIDInput.getText() + ".txt").exists()) {
-                    File userFile = new File(IO.getDOCS().toString() + "/" + userIDInput.getText() + ".txt"); //Creates User File
+                    //Creates User File
+                    File userFile = new File(IO.getDOCS().toString() + "/" + userIDInput.getText() + ".txt");
 
-                    User newUser; //Creates New User
-                    if (userSemesterInput.getText().equals("")) {
-                        newUser = new User(userFirstNameInput.getText(), userLastNameInput.getText(), userPassInput.getText(), userIDInput.getText());
-                    } else {
-                        newUser = new User(userFirstNameInput.getText(), userLastNameInput.getText(), userPassInput.getText(), userIDInput.getText(), userSemesterInput.getText());
-                    }
+                    //Creates New User
+                    User newUser = new User(userFirstNameInput.getText(),
+                            userLastNameInput.getText(), userPassInput.getText(),
+                            userIDInput.getText(), userSemesterInput.getText());
 
                     //Writes Info To User File
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(userFile))) {
                         bw.write(newUser.toString());
                         bw.flush();
                         bw.close();
-                        System.out.println("Please Log-In With Your New Account!");
+                        //System.out.println("Please Log-In With Your New Account!");
                     } catch (IOException ex) {
                         ex.printStackTrace();
-                        System.out.println("Could Not Create A New User!");
+                        //System.out.println("Could Not Create A New User!");
                     } finally {
                         DisplayStage.close();
                     }
                 } else {
-                    System.out.println("Account Already Exists!");
+                    DisplayWarning.show("Could Not Create A New User!");
+                    //System.out.println("Account Already Exists!");
                 }
             }
 
