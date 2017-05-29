@@ -87,7 +87,7 @@ class DisplayAddClass {
         //Button
         Button userSubmit = new Button("Submit");
         userSubmit.setOnAction((ActionEvent e) -> {
-            if (Save.currentUser != null) {
+            if (Save.isUserLoggedIn()) {
                 /**
                  * Do Checks
                  */
@@ -104,10 +104,9 @@ class DisplayAddClass {
                                 returnTimeFromComboBox(TIME_TO_MINUTE_CB.getSelectionModel().getSelectedItem()), //
                                 returnTimeFromComboBox(TIME_TO_PERIOD_CB.getSelectionModel().getSelectedItem()),
                                 CLASS_ID_INPUT.getText(), CLASS_NAME_INPUT.getText(), CLASS_LOCATION_INPUT.getText()));
+                DisplayTableView.addData();
                 DisplayStage.close();
                 //System.out.println("Class Input: " + Save.currentUser.getClassesArrayList().get(0)); //Logging
-            } else {
-                System.out.println("You're not logged in!");
             }
         });
 

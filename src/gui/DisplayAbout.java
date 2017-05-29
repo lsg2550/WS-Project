@@ -32,7 +32,7 @@ class DisplayAbout {
 
         //Children
         root.getChildren().addAll(imageView, info);
-        scene = new Scene(root, 100, 100);
+        scene = new Scene(root, 150, 100);
     }
 
     protected static Scene getScene() {

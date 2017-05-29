@@ -74,6 +74,7 @@ class DisplaySignIn {
                     br.close(); //Reading is done.
                     if (userCheck && passCheck) {
                         Save.loadInfo(userFile);
+                        DisplayTableView.addData();
                         System.out.printf("Welcome, %s.", Save.currentUser.getFirstName()); //Logging
 
                         DisplayStage.close();

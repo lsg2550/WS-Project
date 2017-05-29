@@ -24,13 +24,12 @@ class DisplayRemoveClass {
         //Button
         Button removeClass = new Button("Remove");
         removeClass.setOnAction(e -> {
-            if (Save.currentUser != null) {
+            if (Save.isUserLoggedIn()) {
                 if (!USER_CLASSES_TO_BE_REMOVED.getItems().isEmpty()) {
                     Save.currentUser.getClassesArrayList().remove(USER_CLASSES_TO_BE_REMOVED.getSelectionModel().getSelectedIndex());
+                    DisplayTableView.addData();
                     DisplayStage.close();
                 }
-            } else {
-                System.out.println("You're Not Logged In!");
             }
         });
 

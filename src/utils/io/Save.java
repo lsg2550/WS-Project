@@ -20,7 +20,7 @@ public class Save {
     public static User currentUser;
 
     public static void saveInfo() {
-        if (currentUser != null) {
+        if (isUserLoggedIn()) {
             File file = new File(IO.getDOCS().toString() + "/" + currentUser.getStudentID() + ".txt");
 
             if (file.exists()) {
@@ -37,7 +37,8 @@ public class Save {
                     System.out.println("There was an issue saving.");
                 }
             } else {
-                System.out.println("It appears you have not created an account or your information has gone missing.");
+                DisplayWarning.show("It appears you have not created an account or your information has gone missing.");
+                //System.out.println("It appears you have not created an account or your information has gone missing.");
             }
         }
     }
@@ -45,7 +46,7 @@ public class Save {
     public static void loadInfo(File userFile) {
         try (BufferedReader br = new BufferedReader(new FileReader(userFile))) {
             currentUser = new User();
-            
+
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 if (line.startsWith("ID: ")) {
                     line = line.replace("ID: ", " ").trim();
@@ -115,6 +116,15 @@ public class Save {
         } catch (IOException ex) {
             DisplayWarning.show("Issue Loading User File!");
             //System.out.println("Issue Loading User File!");
+        }
+    }
+
+    public static boolean isUserLoggedIn() {
+        if (currentUser != null) {
+            return true;
+        } else {
+            System.out.println("You're Not Logged In!");
+            return false;
         }
     }
 }

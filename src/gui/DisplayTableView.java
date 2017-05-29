@@ -5,7 +5,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import user.Classes;
+import utils.io.Save;
 
 /**
  *
@@ -61,14 +63,17 @@ class DisplayTableView {
         tableColumnFriday.setResizable(false);
         tableColumnSaturday.setResizable(false);
         tableColumnSunday.setResizable(false);
-//        tableColumnTime.setCellValueFactory(new PropertyValueFactory<>("itemName"));
-//        tableColumnMonday.setCellValueFactory(new PropertyValueFactory<>("itemDesc"));
-//        tableColumnTuesday.setCellValueFactory(new PropertyValueFactory<>("invStock"));
-//        tableColumnWednesday.setCellValueFactory(new PropertyValueFactory<>("itemDesc"));
-//        tableColumnThursday.setCellValueFactory(new PropertyValueFactory<>("invStock"));
-//        tableColumnFriday.setCellValueFactory(new PropertyValueFactory<>("itemDesc"));
-//        tableColumnSaturday.setCellValueFactory(new PropertyValueFactory<>("invStock"));
-//        tableColumnSunday.setCellValueFactory(new PropertyValueFactory<>("invStock"));
+
+        //Cell Value Factory
+        //tableColumnTime.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        tableColumnMonday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+        tableColumnTuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
+        tableColumnWednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
+        tableColumnThursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
+        tableColumnFriday.setCellValueFactory(new PropertyValueFactory<>("friday"));
+        tableColumnSaturday.setCellValueFactory(new PropertyValueFactory<>("saturday"));
+        tableColumnSunday.setCellValueFactory(new PropertyValueFactory<>("sunday"));
+
         DISPLAY_CLASSES_TABLEVIEW.setFixedCellSize(35);
         DISPLAY_CLASSES_TABLEVIEW.setEditable(false);
         DISPLAY_CLASSES_TABLEVIEW.getColumns().addAll(tableColumn);
@@ -87,11 +92,25 @@ class DisplayTableView {
         });
     }
 
-    protected static void addData() {
+    private static void generateTime() {
         /**
-         * Grab Info from Save.currentUser and put it into the tableview
+         * Generate Time for Time Column
          */
 
+        for (int i = 1; i <= 12; i++) {//Hours
+            for (int j = 0; j < 60; j += 5) { //Minutes
+                if (Integer.toString(j).length() == 1) {
+                    System.out.println("Time: " + i + ":0" + j);
+                } else {
+                    System.out.println("Time: " + i + ":" + j);
+                }
+            }
+        }
+    }
+
+    protected static void addData() {
+        DISPLAY_CLASSES_OBSERVABLELIST.clear();
+        DISPLAY_CLASSES_OBSERVABLELIST.addAll(Save.currentUser.getClassesArrayList());
         DISPLAY_CLASSES_TABLEVIEW.setItems(DISPLAY_CLASSES_OBSERVABLELIST);
     }
 
