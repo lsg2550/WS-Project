@@ -1,5 +1,6 @@
 package gui;
 
+import assets.css.CSS;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utils.io.IO;
@@ -22,6 +23,7 @@ public class Launcher extends Application {
         DisplayWarning.init();
         DisplayAbout.init();
         IO.init();
+        CSS.init();
         GUI gui = new GUI(primaryStage);
     }
 
