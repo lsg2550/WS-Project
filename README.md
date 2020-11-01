@@ -1,2 +1,2 @@
-# WS-Project
-Software Eng, WS Project
+# Weekly Scheduler
+Software Engineering I Project (Spring 2016)
